@@ -1,54 +1,52 @@
 package com.example.mymanager;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private WebView webView;
-    private String url = "https://www.naver.com"; // 원하는 주소
-
-
-
-
-
+    Fragment1 fragment1;
+    Fragment2 fragment2;
+    Fragment3 fragment3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fragment1 = new Fragment1();
+        fragment2 = new Fragment2();
+        fragment3 = new Fragment3();
 
-        webView = (WebView) findViewById(R.id.webView); // webview id 값
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment1).commit();
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(url);
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClientClass());
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.tab1:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container ,fragment1).commit();
+                        return true;
+                    case R.id.tab2:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment2).commit();
+                        return true;
+                    case R.id.tab3:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment3).commit();
+                        return  true;
+                }
 
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) { //안드로이드에서 어떤 특정한  key값을 지정 해줘라
-       if((keyCode == KeyEvent.KEYCODE_BACK)&& webView.canGoBack() ){
-           webView.goBack();
-           return true;
-       }
-        return super.onKeyDown(keyCode, event);
-    }
+                return false;
+            }
+        });
 
 
-    private class WebViewClientClass extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) { //현재 페이지 보일수 있는 메소드
-            view.loadUrl(url);
-            return true;
-        }
+
     }
 }
+

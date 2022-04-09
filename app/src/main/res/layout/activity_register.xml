@@ -64,44 +64,40 @@
         app:layout_constraintEnd_toEndOf="@+id/et_hei"
         app:layout_constraintStart_toStartOf="@+id/et_hei"
         app:layout_constraintTop_toBottomOf="@+id/et_hei" />
-    <EditText
-        android:id="@+id/et_gen"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="성별"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_wei"
-        app:layout_constraintStart_toStartOf="@+id/et_wei"
-        app:layout_constraintTop_toBottomOf="@+id/et_wei" />
+<!--    <EditText-->
+<!--        android:id="@+id/et_gen"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="성별"-->
+<!--        android:inputType="textPersonName"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/et_wei"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/et_wei"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_wei" />-->
+
     <RadioGroup
         android:id="@+id/genderGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_gen">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/genderWoman"
-            android:checked="true"
-            android:text="여성"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/genderMan"
-            android:text="남성"/>
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
     </RadioGroup>
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:text="회원가입"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/genderGroup"
-        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup"
+        app:layout_constraintVertical_bias="0.723" />
 
     <Button
         android:id="@+id/validateButton"
@@ -113,4 +109,31 @@
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toEndOf="@+id/et_id"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/genderWoman"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="20dp"
+        android:checked="true"
+        android:text="여성"
+        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genderMan" />
+
+    <RadioButton
+        android:id="@+id/genderMan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="17dp"
+        android:text="남성"
+        app:layout_constraintBottom_toTopOf="@+id/genderWoman"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_wei" />
 </androidx.constraintlayout.widget.ConstraintLayout>

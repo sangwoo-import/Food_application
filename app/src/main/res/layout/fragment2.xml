@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    tools:context=".Fragment2"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_open"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="맞춤 기사"/>
+    <TextView
+        android:id="@+id/menu_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#E11258"
+        android:text="항목들 "/>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#03A9F4"
+            android:gravity="center"
+            android:text="다이어트" />
+
+        <ImageButton
+            android:id="@+id/Diet_btn"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_margin="0dp"
+
+            android:background="@drawable/dietimg"
+
+            android:gravity="center"
+
+
+            android:scaleType="fitXY"
+            android:text="다이어트"
+
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#03A9F4"
+            android:gravity="center"
+            android:text="당뇨병" />
+
+        <ImageButton
+            android:id="@+id/dn_btn"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_margin="0dp"
+            android:background="@drawable/img_1"
+
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="당뇨병" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#03A9F4"
+            android:gravity="center"
+            android:text="벌크업" />
+
+        <ImageButton
+            android:id="@+id/bulk_btn"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_margin="0dp"
+
+            android:background="@drawable/img"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="벌크업" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#03A9F4"
+            android:gravity="center"
+
+            android:text="고혈압" />
+
+        <ImageButton
+            android:id="@+id/go_btn"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_margin="0dp"
+            android:background="@drawable/go"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="고혈압" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+    <!--<include layout="@layout/activity_drawer"/>-->
+
+
+
+
+
+
+
+
+
+
+

@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_pass=findViewById(R.id.et_pass);
         et_hei=findViewById(R.id.et_hei);
         et_wei=findViewById(R.id.et_wei);
-         et_gen=findViewById(R.id.et_gen);
+         //et_gen=findViewById(R.id.et_gen);
         et_passck=findViewById(R.id.et_passck);
         validateButton=findViewById(R.id.validateButton);
         genderGroup = findViewById(R.id.genderGroup);         //라디오 그룹 참조하기
@@ -48,18 +48,18 @@ public class RegisterActivity extends AppCompatActivity {
         genderMan = findViewById(R.id.genderMan);
 
 
-//        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                if (i == R.id.genderWoman) {
-//                    Toast.makeText(RegisterActivity.this, "female", Toast.LENGTH_SHORT).show();
-//                    userGender = genderWoman.getText().toString();
-//                } else if (i == R.id.genderMan) {
-//                    Toast.makeText(RegisterActivity.this, "male", Toast.LENGTH_SHORT).show();
-//                    userGender = genderMan.getText().toString();
-//                }
-//            }
-//        });
+        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.genderWoman) {
+                    Toast.makeText(RegisterActivity.this, "female", Toast.LENGTH_SHORT).show();
+                    userGender = genderWoman.getText().toString();
+                } else if (i == R.id.genderMan) {
+                    Toast.makeText(RegisterActivity.this, "male", Toast.LENGTH_SHORT).show();
+                    userGender = genderMan.getText().toString();
+                }
+            }
+        });
 
         validateButton.setOnClickListener(new View.OnClickListener() {//id중복체크
             @Override
