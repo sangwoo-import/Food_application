@@ -29,6 +29,23 @@
         <entry key="..\:/Food_APP/app/src/main/res/xml/file_paths.xml" value="1.332236842105263" />
         <entry key="..\:/Users/Ryo_ideapad_slim3/AndroidStudioProjects/Mymanager/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ryo_ideapad_slim3/AndroidStudioProjects/Mymanager/app/src/main/res/layout/activity_register.xml" value="0.22826086956521738" />
+        <entry key="app/src/main/res/drawable/circle_progress_bar.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/circle_progressbar.xml" value="0.306" />
+        <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/coding_img.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/item_color.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-v21/fragment3.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main1.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.20969202898550723" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.20969202898550723" />
+        <entry key="app/src/main/res/layout/fragment1.xml" value="0.20969202898550723" />
+        <entry key="app/src/main/res/layout/fragment2.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/fragment3.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/gallery.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/progressbar.xml" value="0.335" />
+        <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.3307291666666667" />
       </map>
     </option>
   </component>
