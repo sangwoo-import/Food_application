@@ -31,6 +31,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="촬영"/>
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE" />
+
+
 
     </LinearLayout>
 

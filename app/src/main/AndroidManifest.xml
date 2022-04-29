@@ -45,17 +45,25 @@
     android:name=".CameraActivity2"
     android:exported="true">
 
+
 </activity>
 
+<activity android:name=".TensorActivity"
+    android:exported="true">
 
+
+</activity>
 
         <activity android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
 
 
         </activity>
@@ -71,6 +79,15 @@
         </activity>
 
 
+        <activity android:name=".testActivity"
+
+            android:exported="true" >
+
+
+
+        </activity>
+
+
         <activity android:name=".DietActivity" />
 
         <activity android:name=".BulkActivity" />
@@ -79,17 +96,30 @@
         <activity android:name=".GohyulAapActivity" />
 
 
-        <provider
+<!--        <provider-->
 
-            android:authorities="com.example.mymanager"
+<!--            android:authorities="com.example.mymanager"-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/file_paths"/>-->
+
+<!--        </provider>-->
+
+
+        <provider
             android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
+            <!--파일경로 xml 생성-->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
-
+                android:resource="@xml/file_text"/>
         </provider>
+
 
     </application>
 

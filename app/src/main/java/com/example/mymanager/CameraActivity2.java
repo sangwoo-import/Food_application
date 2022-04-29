@@ -1,6 +1,4 @@
 package com.example.mymanager;
-
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -42,8 +40,8 @@ public class CameraActivity2 extends AppCompatActivity { // 갤러리 사진 불
             }
         });
 
+}
 
-    }
 
 
 
