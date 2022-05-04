@@ -7,15 +7,14 @@ android {
 
     defaultConfig {
         applicationId "com.example.mymanager"
-        minSdk 19 //원래 21임
+        minSdk 28 //원래 21임
         targetSdk 32
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        aaptOptions { //텐서플로우 빌드 적용
-            noCompress "tflite"
-        }
+
+
 
     }
 
@@ -25,11 +24,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    aaptOptions { //텐서플로우 빌드 적용
+        noCompress "tflite"
+    }
 
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        mlModelBinding true
     }
 }
 
@@ -44,6 +49,14 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     //카메라 권한 띄어주는 창을 만들어주는 패키지
     implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
+    //텐서플로우 라이브러리
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+    // Import tflite dependencies
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+
+    // The GPU delegate library is optional. Depend on it as needed.
+
 
 
     testImplementation 'junit:junit:4.13.2'
@@ -53,6 +66,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
-    implementation 'org.tensorflow:tensorflow-lite:+'  //텐서플로우 적용
+    implementation 'org.tensorflow:tensorflow-lite:+' //텐서플로우 적용
 
 }
