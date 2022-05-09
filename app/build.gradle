@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.mymanager"
-        minSdk 28 //원래 21임
+        minSdk 19 //원래 21임
         targetSdk 32
         versionCode 1
         versionName "1.0"

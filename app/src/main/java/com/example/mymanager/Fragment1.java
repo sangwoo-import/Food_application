@@ -1,11 +1,16 @@
 package com.example.mymanager;
 
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
@@ -18,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,10 +35,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import org.tensorflow.lite.Interpreter;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -43,20 +55,39 @@ public class Fragment1 extends Fragment {
     public static final int REQUEST_TAKE_PHOTO = 10;
     public static final int REQUEST_PERMISSION = 11;
 
-    private Button btnCamera, btnSave;
+    private Button btnCamera, btnSave,button_1;
     private ImageView ivCapture;
     private String mCurrentPhotoPath;
-
+    private TextView tv_output;
+    private static final int FROM_ALBUM = 1;
    
     @Override
     public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View s = inflater.inflate(R.layout.fragment1, container, false);
 
+
+
+        button_1 = s.findViewById(R.id.button_1);
+
+        button_1.setOnClickListener(new View.OnClickListener() {  // 갤러리 가져오기
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");                      // 이미지만
+                intent.setAction(Intent.ACTION_GET_CONTENT);    // 카메라(ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, FROM_ALBUM);
+            }
+
+        });
+
+
         checkPermission(); //권한체크
 
-       ivCapture =s.findViewById(R.id.ivCapture); //ImageView 선언
+         ivCapture =s.findViewById(R.id.ivCapture); //ImageView 선언
          btnCamera =s.findViewById(R.id.btnCapture); //Button 선언
          btnSave = s.findViewById(R.id.btnSave); //Button 선언
+         tv_output = s.findViewById(R.id.tv_output);
+
 
         //loadImgArr();
 
@@ -88,8 +119,9 @@ public class Fragment1 extends Fragment {
         return s; // 리턴을 무조건 해줘야함
 
         }
+
     
-        private void captureCamera () {
+        private void captureCamera () {  //카메라 촬영
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 
@@ -139,6 +171,10 @@ public class Fragment1 extends Fragment {
             }
         }
 
+
+
+
+
         //이미지저장 메소드
         private void saveImg () {
 
@@ -181,7 +217,7 @@ public class Fragment1 extends Fragment {
             }
         }
 
-//    private void loadImgArr() {
+//    private void loadImgArr() { //이미지 로드
 //        try {
 //
 //            File storageDir = new File(getFilesDir() + "/capture");
@@ -196,15 +232,26 @@ public class Fragment1 extends Fragment {
 //            Toast.makeText(this, "load failed", Toast.LENGTH_SHORT).show();
 //        }
 //    }
+//
+
 
         @Override
-        public void onActivityResult ( int requestCode, int resultCode, Intent intent){
+        public void onActivityResult ( int requestCode, int resultCode, Intent intent){ //이미지 촬영 이미지뷰 및 갤러리 텐서플로우
             super.onActivityResult(requestCode, resultCode, intent);
+
+            float[][][][] input = new float[1][224][224][3];
+            float[][][] output = new float[1][12543][4];
+
             try {
                 //after capture
                 switch (requestCode) {
                     case REQUEST_TAKE_PHOTO: {
-                        if (resultCode == Activity.RESULT_OK) { // Activity를 추가하였음
+                        //갤러리 가져오는 구문 시작
+
+                        if (resultCode == Activity.RESULT_OK  ) {
+                            // Activity를 추가하였음
+
+
 
                             File file = new File(mCurrentPhotoPath);
                             Bitmap bitmap = MediaStore.Images.Media
@@ -214,6 +261,20 @@ public class Fragment1 extends Fragment {
                                 ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                                 int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                                         ExifInterface.ORIENTATION_UNDEFINED);
+
+                                int batchNum = 0;
+                                for (int x = 0; x < 224; x++) {
+                                    for (int y = 0; y < 224; y++) {
+                                        int pixel = bitmap.getPixel(x, y);
+                                        input[batchNum][x][y][0] = Color.red(pixel) / 1.0f;
+                                        input[batchNum][x][y][1] = Color.green(pixel) / 1.0f;
+                                        input[batchNum][x][y][2] = Color.blue(pixel) / 1.0f;
+                                    }
+                                }
+
+                                Interpreter lite = getTfliteInterpreter("output224.tflite");
+
+                                lite.run(input,output);
 
 //                            //사진해상도가 너무 높으면 비트맵으로 로딩
 //                            BitmapFactory.Options options = new BitmapFactory.Options();
@@ -240,6 +301,86 @@ public class Fragment1 extends Fragment {
                                         rotatedBitmap = bitmap;
                                 }
 
+
+                                //Rotate한 bitmap을 ImageView에 저장
+                                ivCapture.setImageBitmap(rotatedBitmap);
+
+                            }
+                        }
+                        break;
+                    }
+
+
+                }
+
+            } catch (Exception e) {
+                Log.w(TAG, "onActivityResult Error !", e);
+            }
+
+
+
+
+
+            try { // 갤러리에서 가져오기
+                //after capture
+                switch (requestCode) {
+                    case FROM_ALBUM: {
+                        //갤러리 가져오는 구문 시작
+
+                        if (resultCode == Activity.RESULT_OK  ) {
+                            // Activity를 추가하였음
+
+
+
+                            File file = new File(mCurrentPhotoPath);
+                            Bitmap bitmap = MediaStore.Images.Media
+                                    .getBitmap(getActivity().getContentResolver(), Uri.fromFile(file));//getActivity를 붙임
+
+                            if (bitmap != null) {
+                                ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
+                                int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                                        ExifInterface.ORIENTATION_UNDEFINED);
+
+                                int batchNum = 0;
+                                for (int x = 0; x < 224; x++) {
+                                    for (int y = 0; y < 224; y++) {
+                                        int pixel = bitmap.getPixel(x, y);
+                                        input[batchNum][x][y][0] = Color.red(pixel) / 1.0f;
+                                        input[batchNum][x][y][1] = Color.green(pixel) / 1.0f;
+                                        input[batchNum][x][y][2] = Color.blue(pixel) / 1.0f;
+                                    }
+                                }
+
+                                Interpreter lite = getTfliteInterpreter("output224.tflite");
+
+                                lite.run(input,output);
+
+//                            //사진해상도가 너무 높으면 비트맵으로 로딩
+//                            BitmapFactory.Options options = new BitmapFactory.Options();
+//                            options.inSampleSize = 8; //8분의 1크기로 비트맵 객체 생성
+//                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+
+                                Bitmap rotatedBitmap = null;
+                                switch (orientation) {
+
+                                    case ExifInterface.ORIENTATION_ROTATE_90:
+                                        rotatedBitmap = rotateImage(bitmap, 90);
+                                        break;
+
+                                    case ExifInterface.ORIENTATION_ROTATE_180:
+                                        rotatedBitmap = rotateImage(bitmap, 180);
+                                        break;
+
+                                    case ExifInterface.ORIENTATION_ROTATE_270:
+                                        rotatedBitmap = rotateImage(bitmap, 270);
+                                        break;
+
+                                    case ExifInterface.ORIENTATION_NORMAL:
+                                    default:
+                                        rotatedBitmap = bitmap;
+                                }
+
+
                                 //Rotate한 bitmap을 ImageView에 저장
                                 ivCapture.setImageBitmap(rotatedBitmap);
 
@@ -249,10 +390,46 @@ public class Fragment1 extends Fragment {
                     }
                 }
 
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 Log.w(TAG, "onActivityResult Error !", e);
             }
+
+
+
+            //인식한부본 출렫하기!!!!
+            int i;
+            for (i = 0; i <4; i++) {
+                if (output[0][0][i] * 100 > 30) {
+                    if (i == 0) {
+                        tv_output.setText(String.format("bg  %d %.5f", i, output[0][1][0] * 100));
+                    } else if (i == 1) {
+                        tv_output.setText(String.format("kim  %d  %.5f", i, output[0][1][1] * 100));
+                    } else if (i == 2) {
+                        tv_output.setText(String.format("kimchi %d, %.5f", i, output[0][1][2] * 100));
+                    }
+                    else if (i == 3) {
+                        tv_output.setText(String.format("bab, %d, %.5f", i, output[0][1][3] * 100));
+                    }
+                    else {
+                        tv_output.setText(String.format("아무 음식, %d, %.5f", i));
+                        //output[0][0][4] * 100)
+                    }
+                } else
+                    continue;
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
 
         //카메라에 맞게 이미지 로테이션
         public static Bitmap rotateImage (Bitmap source,float angle){
@@ -310,6 +487,29 @@ public class Fragment1 extends Fragment {
     }
 
 
+    private Interpreter getTfliteInterpreter(String modelPath) {
+        try {
+            return new Interpreter(loadModelFile(getActivity(), modelPath)); //getActivity 아닐 수도있음
+
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private MappedByteBuffer loadModelFile(Activity activity, String modelPath) throws IOException {
+        AssetFileDescriptor fileDescriptor = activity.getAssets().openFd(modelPath);
+        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = inputStream.getChannel();
+        long startOffset = fileDescriptor.getStartOffset();
+        long declaredLength = fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+    }
+
+
+
+}
 
 

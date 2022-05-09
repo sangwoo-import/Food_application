@@ -1,40 +1,32 @@
 package com.example.mymanager;
-
-import android.app.Activity;
-import android.content.res.AssetFileDescriptor;
-import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
-
-
-
+import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.ViewManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import org.tensorflow.lite.Interpreter;
 
@@ -43,36 +35,77 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
-public class testActivity extends AppCompatActivity {
+public class FoodAddActivity  extends AppCompatActivity {
+    Fragment3 fragment;
+
+    private static String food[]={"bg","김","김치","밥"};
+
 
     private static final String TAG = "testActivity"; //  이거안되면 CameraActivity
 
     public static final int REQUEST_TAKE_PHOTO = 10;
     public static final int REQUEST_PERMISSION = 11;
+    private static final int FROM_ALBUM = 1;
 
-    private Button btnCamera, btnSave;
+    private Button btnCamera, btnSave,button_1,button_2;
     private ImageView ivCapture;
     private String mCurrentPhotoPath;
-
+    private TextView tv_output;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_food);
 
-        checkPermission(); //권한체크
+
 
         ivCapture = findViewById(R.id.ivCapture); //ImageView 선언
         btnCamera = findViewById(R.id.btnCapture); //Button 선언
         btnSave = findViewById(R.id.btnSave); //Button 선언
+        tv_output = findViewById(R.id.tv_output);
+        button_2 = findViewById(R.id.button_2);
 
-        loadImgArr();
+
+        button_1= findViewById(R.id.button_1);
+
+
+
+
+        findViewById(R.id.button_1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");                      // 이미지만
+                intent.setAction(Intent.ACTION_GET_CONTENT);    // 카메라(ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, FROM_ALBUM);
+            }
+        });
+
+        fragment = new Fragment3();
+
+        button_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               getSupportFragmentManager().beginTransaction().replace(R.id.button_2, fragment).commit();
+
+            }
+        });
+
+
+
+
+
+
+        checkPermission(); //권한체크
+
+
+        //loadImgArr();
 
         //촬영
         btnCamera.setOnClickListener(v -> captureCamera());
@@ -99,6 +132,9 @@ public class testActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     private void captureCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -190,26 +226,39 @@ public class testActivity extends AppCompatActivity {
         }
     }
 
-    private void loadImgArr() {
-        try {
-
-            File storageDir = new File(getFilesDir() + "/capture");
-            String filename = "캡쳐파일" + ".jpg";
-
-            File file = new File(storageDir, filename);
-            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-            ivCapture.setImageBitmap(bitmap);
-
-        } catch (Exception e) {
-            Log.w(TAG, "Capture loading Error!", e);
-            Toast.makeText(this, "load failed", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void loadImgArr() {
+//        try {
+//
+//            File storageDir = new File(getFilesDir() + "/capture");
+//            String filename = "캡쳐파일" + ".jpg";
+//
+//            File file = new File(storageDir, filename);
+//            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+//            ivCapture.setImageBitmap(bitmap);
+//
+//        } catch (Exception e) {
+//            Log.w(TAG, "Capture loading Error!", e);
+//            Toast.makeText(this, "load failed", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        try {
+
+
+
+
+
+
+
+        float[][][][] input = new float[1][224][224][3];
+        float[][][] output = new float[1][12543][4];
+
+
+
+
+        try { //촬영 이미지
             //after capture
             switch (requestCode) {
                 case REQUEST_TAKE_PHOTO: {
@@ -223,6 +272,22 @@ public class testActivity extends AppCompatActivity {
                             ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                             int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                                     ExifInterface.ORIENTATION_UNDEFINED);
+
+
+                            int batchNum = 0;
+                            for (int x = 0; x < 224; x++) {
+                                for (int y = 0; y < 224; y++) {
+                                    int pixel = bitmap.getPixel(x, y);
+                                    input[batchNum][x][y][0] = Color.red(pixel) / 1.0f;
+                                    input[batchNum][x][y][1] = Color.green(pixel) / 1.0f;
+                                    input[batchNum][x][y][2] = Color.blue(pixel) / 1.0f;
+                                }
+                            }
+
+                            Interpreter lite = getTfliteInterpreter("output225.tflite");
+
+                            lite.run(input,output);
+
 
 //                            //사진해상도가 너무 높으면 비트맵으로 로딩
 //                            BitmapFactory.Options options = new BitmapFactory.Options();
@@ -261,7 +326,126 @@ public class testActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.w(TAG, "onActivityResult Error !", e);
         }
+
+
+        int j;
+
+//        for (j = 0; j <4; j++) {
+//            if (output[0][0][j] * 100 > 30) {
+//                if (j == 0) {
+//                    tv_output.setText(String.format("bg  %d %.5f", j, output[0][0][0] * 100));
+//                } else if (j == 1) {
+//                    tv_output.setText(String.format("bab  %d  %.5f", j, output[0][0][1] * 100));
+//                } else if (j == 2) {
+//                    tv_output.setText(String.format("kim %d, %.5f", j, output[0][0][2] * 100));
+//                }
+//                else if (j == 3) {
+//                    tv_output.setText(String.format("nothing, %d, %.5f", j, output[0][0][3] * 100));
+//                }
+//                else {
+//                    tv_output.setText(String.format("아무 음식, %d, %.5f", j));
+//                    //output[0][0][4] * 100)
+//                }
+//            } else
+//                continue;
+//        }
+
+
+
+
+
+
+
+
+
+
+
+        if (requestCode != FROM_ALBUM || resultCode != RESULT_OK) // 갤러리 사용
+            return;
+        try {  // 갤러리 사용
+
+            int batchNum = 0;
+            InputStream buf = getContentResolver().openInputStream(intent.getData()); // intetn대신 data였음 tensor에는
+            Bitmap bitmap = BitmapFactory.decodeStream(buf);
+            buf.close();
+
+            //이미지 뷰에 선택한 사진 띄우기
+            ImageView iv = findViewById(R.id.ivCapture);
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            iv.setImageBitmap(bitmap);
+
+
+            // x,y 최댓값 사진 크기에 따라 달라짐 (조절 해줘야함)
+            for (int x = 0; x < 224; x++) {
+                for (int y = 0; y < 224; y++) {
+                    int pixel = bitmap.getPixel(x, y);
+                    input[batchNum][x][y][0] = Color.red(pixel) / 1.0f;
+                    input[batchNum][x][y][1] = Color.green(pixel) / 1.0f;
+                    input[batchNum][x][y][2] = Color.blue(pixel) / 1.0f;
+                }
+            }
+
+            //자신의 tflite 이름 써주기
+            Interpreter lite = getTfliteInterpreter("output225.tflite");
+
+            lite.run(input,output); //output
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        //인식한부본 출렫하기!!!!
+
+
+
+
+        int i;
+
+//
+//        for (i = 1; i <4; i++) {
+//            if (output[0][0][i] * 100 > 90) {
+//                if (i == 1) {
+//                    tv_output.setText(String.format(" bbb  %d %.2f",i,  output[0][0][1] * 100));
+//                }
+//                else if (i == 2) {
+//                    tv_output.setText(String.format("kkk  %d  %.5f", i, output[0][0][2] * 100));
+//                }
+//                else if (i == 3) {
+//                    tv_output.setText(String.format("ccc ,%d %.5f", i, output[0][0][3] * 100));
+//                }
+//                else {
+//                    tv_output.setText(String.format("아무 음식, %d, %.5f", i));
+//
+//                }
+//              } else
+//                continue;
+//        }
+//            this.food=food;
+        tv_output.setText(String.format("bbb %f", output[0][0][1] * 100));
+        tv_output.setText(String.format("kkk %f", output[0][0][2] * 100));
+        tv_output.setText(String.format("ccc %f", output[0][0][3] * 100));
+//        tv_output.setText(String.valueOf(output[0][0][0]));
+//        tv_output.setText(String.valueOf(output[0][0][1]));
+//        tv_output.setText(String.valueOf(output[0][0][2]));
+//        tv_output.setText(String.valueOf(output[0][0][3]));
+//        tv_output.setText(String.valueOf(output[0][1][1]));
+//        tv_output.setText(String.valueOf(output[0][1][2]));
+//        tv_output.setText(String.valueOf(output[0][2][0]));
+//        tv_output.setText(String.valueOf(output[0][2][1]));
+//        tv_output.setText(String.valueOf(output[0][2][2]));
+
+
+
     }
+
+
+
+
 
     //카메라에 맞게 이미지 로테이션
     public static Bitmap rotateImage(Bitmap source, float angle) {
@@ -317,5 +501,35 @@ public class testActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+    private Interpreter getTfliteInterpreter(String modelPath) {
+        try {
+            return new Interpreter(loadModelFile(FoodAddActivity.this, modelPath));
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private MappedByteBuffer loadModelFile(Activity activity, String modelPath) throws IOException {
+        AssetFileDescriptor fileDescriptor = activity.getAssets().openFd(modelPath);
+        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = inputStream.getChannel();
+        long startOffset = fileDescriptor.getStartOffset();
+        long declaredLength = fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+    }
+
+
+
+
 
 }

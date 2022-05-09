@@ -25,7 +25,7 @@ public class Fragment3 extends Fragment {
                     breakfast_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getActivity(), EditActivity.class);
+                            Intent intent = new Intent(getActivity(),FoodAddActivity.class);
                             startActivity(intent);
                         }
                     });

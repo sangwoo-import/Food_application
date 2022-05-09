@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Food_APP/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Food_APP/app/src/main/res/drawable/circle_progress_bar.xml" value="0.1" />
+        <entry key="..\:/Food_APP/app/src/main/res/drawable/circle_shape.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/drawable/coding_img.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/drawable/item_color.xml" value="0.1" />
@@ -13,43 +15,30 @@
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_dangn.xml" value="0.19202898550724637" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_diet.xml" value="0.19202898550724637" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_drawer.xml" value="0.264" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/activity_edit.xml" value="0.2" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/activity_food.xml" value="0.264" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_gohyul.xml" value="0.19202898550724637" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/activity_item_list.xml" value="0.31614583333333335" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/activity_list.xml" value="0.31614583333333335" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_main1.xml" value="0.14221014492753623" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_menu.xml" value="0.264" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/Food_APP/app/src/main/res/layout/fragment1.xml" value="0.1" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/activity_tensor.xml" value="0.278125" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/activity_test.xml" value="0.24230072463768115" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/fragment1.xml" value="0.25" />
         <entry key="..\:/Food_APP/app/src/main/res/layout/fragment2.xml" value="0.152" />
-        <entry key="..\:/Food_APP/app/src/main/res/layout/fragment3.xml" value="0.1" />
-        <entry key="..\:/Food_APP/app/src/main/res/layout/gallery.xml" value="0.1322463768115942" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/fragment3.xml" value="0.264" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/gallery.xml" value="0.2" />
+        <entry key="..\:/Food_APP/app/src/main/res/layout/tset2.xml" value="0.2" />
         <entry key="..\:/Food_APP/app/src/main/res/menu/menu_bottom.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Food_APP/app/src/main/res/xml/file_paths.xml" value="1.332236842105263" />
+        <entry key="..\:/Food_APP/app/src/main/res/xml/file_text.xml" value="0.24230072463768115" />
         <entry key="..\:/Users/Ryo_ideapad_slim3/AndroidStudioProjects/Mymanager/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ryo_ideapad_slim3/AndroidStudioProjects/Mymanager/app/src/main/res/layout/activity_register.xml" value="0.22826086956521738" />
-        <entry key="app/src/main/res/drawable/circle_progress_bar.xml" value="0.2535" />
-        <entry key="app/src/main/res/drawable/circle_progressbar.xml" value="0.306" />
-        <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.2535" />
-        <entry key="app/src/main/res/drawable/coding_img.xml" value="0.178" />
-        <entry key="app/src/main/res/drawable/item_color.xml" value="0.1" />
-        <entry key="app/src/main/res/layout-v21/fragment3.xml" value="0.3307291666666667" />
-        <entry key="app/src/main/res/layout/activity_camera.xml" value="0.3296875" />
-        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.32916666666666666" />
-        <entry key="app/src/main/res/layout/activity_gohyul.xml" value="0.3296875" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3307291666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main1.xml" value="0.3307291666666667" />
-        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.246366528497226" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.20969202898550723" />
-        <entry key="app/src/main/res/layout/fragment1.xml" value="0.20969202898550723" />
-        <entry key="app/src/main/res/layout/fragment2.xml" value="0.3307291666666667" />
-        <entry key="app/src/main/res/layout/fragment3.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/gallery.xml" value="0.3307291666666667" />
-        <entry key="app/src/main/res/layout/practice.xml" value="0.3296875" />
-        <entry key="app/src/main/res/layout/progressbar.xml" value="0.335" />
-        <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.3307291666666667" />
       </map>
     </option>
   </component>
