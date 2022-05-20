@@ -52,8 +52,13 @@ dependencies {
     //텐서플로우 라이브러리
     implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+    //implementation 'org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly-SNAPSHOT'
     // Import tflite dependencies
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
+
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+
 
     // The GPU delegate library is optional. Depend on it as needed.
 
@@ -67,5 +72,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     implementation 'org.tensorflow:tensorflow-lite:+' //텐서플로우 적용
+
 
 }

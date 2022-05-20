@@ -19,11 +19,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Mymanager">
+        android:theme="@style/Theme.Mymanager"
+        android:requestLegacyExternalStorage="true">
+<!--        applpication no such file error날때-->
 
         <activity
             android:name=".LoginActivity"
             android:exported="true">
+
+
 
 
         </activity>
@@ -59,7 +63,11 @@
             android:exported="true">
 
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
 
@@ -92,14 +100,17 @@
         <activity android:name=".FoodAddActivity"
             android:exported="true">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
 
+<activity android:name=".PleaseActivity"
+    android:exported="true">
 
+
+
+</activity>
 
 <activity android:name=".ResultListActivity"
     android:exported="true">
@@ -107,6 +118,10 @@
 
 
 </activity>
+
+        <activity android:name=".FoodEditActivity"
+            android:exported="true">
+        </activity>
 
 
 

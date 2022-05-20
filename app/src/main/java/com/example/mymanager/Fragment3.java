@@ -21,7 +21,7 @@ public class Fragment3 extends Fragment {
         View v = inflater.inflate(R.layout.fragment3, container, false);
 
 
-                    Button breakfast_btn = (Button) v.findViewById(R.id.breakfast_btn);
+                    Button breakfast_btn = (Button) v.findViewById(R.id.foodadd_btn);
                     breakfast_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -30,23 +30,8 @@ public class Fragment3 extends Fragment {
                         }
                     });
 
-                    Button lunch_btn = (Button) v.findViewById(R.id.lunch_btn);
-                    lunch_btn.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view){
-                            Intent intent = new Intent(getActivity(), EditActivity.class);
-                            startActivity(intent);
-                        }
-                    });
 
-                    Button dinner_btn = (Button) v.findViewById(R.id.dinner_btn);
-                    dinner_btn.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view){
-                            Intent intent = new Intent(getActivity(), EditActivity.class);
-                            startActivity(intent);
-                        }
-                    });
+
 
         DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() { // 만들어놓을때 이벤트를 넣으면 된다.
             @Override

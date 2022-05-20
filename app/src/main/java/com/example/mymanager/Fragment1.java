@@ -423,14 +423,6 @@ public class Fragment1 extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
         //카메라에 맞게 이미지 로테이션
         public static Bitmap rotateImage (Bitmap source,float angle){
             Matrix matrix = new Matrix();

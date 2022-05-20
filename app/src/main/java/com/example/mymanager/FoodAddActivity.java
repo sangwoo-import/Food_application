@@ -42,9 +42,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FoodAddActivity  extends AppCompatActivity {
-    Fragment3 fragment;
 
-    private static String food[]={"bg","김","김치","밥"};
+
+
 
 
     private static final String TAG = "testActivity"; //  이거안되면 CameraActivity
@@ -54,9 +54,9 @@ public class FoodAddActivity  extends AppCompatActivity {
     private static final int FROM_ALBUM = 1;
 
     private Button btnCamera, btnSave,button_1,button_2;
-    private ImageView ivCapture;
+    private ImageView ivCapture,imageView2;
     private String mCurrentPhotoPath;
-    private TextView tv_output;
+    private TextView tv_output,tv_output1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +65,15 @@ public class FoodAddActivity  extends AppCompatActivity {
 
 
 
+        imageView2 =findViewById(R.id.imageView2);
         ivCapture = findViewById(R.id.ivCapture); //ImageView 선언
         btnCamera = findViewById(R.id.btnCapture); //Button 선언
         btnSave = findViewById(R.id.btnSave); //Button 선언
-        tv_output = findViewById(R.id.tv_output);
+       tv_output = findViewById(R.id.tv_output);
+        tv_output1 = findViewById(R.id.tv_output1);
+
+
+
         button_2 = findViewById(R.id.button_2);
 
 
@@ -84,15 +89,21 @@ public class FoodAddActivity  extends AppCompatActivity {
                 intent.setType("image/*");                      // 이미지만
                 intent.setAction(Intent.ACTION_GET_CONTENT);    // 카메라(ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, FROM_ALBUM);
+
+
+
+
+
             }
         });
 
-        fragment = new Fragment3();
+
 
         button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               getSupportFragmentManager().beginTransaction().replace(R.id.button_2, fragment).commit();
+               Intent intent = new Intent(FoodAddActivity.this,ResultListActivity.class);
+               startActivity(intent);
 
             }
         });
@@ -284,7 +295,7 @@ public class FoodAddActivity  extends AppCompatActivity {
                                 }
                             }
 
-                            Interpreter lite = getTfliteInterpreter("output225.tflite");
+                            Interpreter lite = getTfliteInterpreter("output226.tflite");
 
                             lite.run(input,output);
 
@@ -369,10 +380,15 @@ public class FoodAddActivity  extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeStream(buf);
             buf.close();
 
+
+
+
+
             //이미지 뷰에 선택한 사진 띄우기
             ImageView iv = findViewById(R.id.ivCapture);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setImageBitmap(bitmap);
+
 
 
             // x,y 최댓값 사진 크기에 따라 달라짐 (조절 해줘야함)
@@ -386,7 +402,7 @@ public class FoodAddActivity  extends AppCompatActivity {
             }
 
             //자신의 tflite 이름 써주기
-            Interpreter lite = getTfliteInterpreter("output225.tflite");
+            Interpreter lite = getTfliteInterpreter("output226.tflite");
 
             lite.run(input,output); //output
 
@@ -396,27 +412,20 @@ public class FoodAddActivity  extends AppCompatActivity {
         }
 
 
-
-
-
         //인식한부본 출렫하기!!!!
 
-
-
-
-        int i;
-
-//
+//        int i;
 //        for (i = 1; i <4; i++) {
 //            if (output[0][0][i] * 100 > 90) {
 //                if (i == 1) {
-//                    tv_output.setText(String.format(" bbb  %d %.2f",i,  output[0][0][1] * 100));
+//                    tv_output.setText(String.format("bg  %d %.2f",i,  output[0][0][1] * 100));
+//
 //                }
 //                else if (i == 2) {
-//                    tv_output.setText(String.format("kkk  %d  %.5f", i, output[0][0][2] * 100));
+//                    tv_output.setText(String.format("kim  %d  %.5f", i, output[0][0][2] * 100));
 //                }
-//                else if (i == 3) {
-//                    tv_output.setText(String.format("ccc ,%d %.5f", i, output[0][0][3] * 100));
+//                if (i == 3) {
+//                    tv_output.setText(String.format("bab "));
 //                }
 //                else {
 //                    tv_output.setText(String.format("아무 음식, %d, %.5f", i));
@@ -425,12 +434,21 @@ public class FoodAddActivity  extends AppCompatActivity {
 //              } else
 //                continue;
 //        }
-//            this.food=food;
-        tv_output.setText(String.format("bbb %f", output[0][0][1] * 100));
-        tv_output.setText(String.format("kkk %f", output[0][0][2] * 100));
-        tv_output.setText(String.format("ccc %f", output[0][0][3] * 100));
-//        tv_output.setText(String.valueOf(output[0][0][0]));
-//        tv_output.setText(String.valueOf(output[0][0][1]));
+
+
+
+
+
+        Intent myintent = new Intent(FoodAddActivity.this,ResultListActivity.class);
+        myintent.putExtra("name",tv_output.getText().toString());
+
+
+
+        //tv_output.setText(String.format("bbb %f", output[1][-1][4] * 100));
+        //tv_output.setText(String.format("kkk %f", output[0][0][2] * 100));
+        //tv_output.setText(String.format("ccc %f", output[0][0][3] * 100));
+          //tv_output.setText(String.valueOf(output[1][48][4]));
+        tv_output.setText(String.valueOf(output[0][0][3]));
 //        tv_output.setText(String.valueOf(output[0][0][2]));
 //        tv_output.setText(String.valueOf(output[0][0][3]));
 //        tv_output.setText(String.valueOf(output[0][1][1]));
