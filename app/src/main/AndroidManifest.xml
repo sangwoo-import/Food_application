@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mymanager">
+<!--   에뮬레이터 저장소 강제로 늘리기-->
+<!--    android:installLocation="preferExternal"-->
     <uses-permission android:name="android.permission.INTERNET"/>
 
-      //카메라 권한 요청할때 쓰인다 3개
+
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -42,10 +44,7 @@
         </activity>
 
 
-
-        <activity android:name=".Main1Activity" />
-
-<activity
+        <activity
     android:name=".CameraActivity2"
     android:exported="true">
 
@@ -63,20 +62,6 @@
             android:exported="true">
 
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
-
-        </activity>
-
-
-        <activity
-            android:name=".CameraActivity"
-            android:exported="true" >
 
 
 
@@ -97,27 +82,29 @@
         <activity android:name=".DietActivity" />
 
         <activity android:name=".BulkActivity" />
+
         <activity android:name=".FoodAddActivity"
             android:exported="true">
 
 
 
+<!--            <intent-filter>-->
+<!--                <action android:name="kr.co.hta.MyAction" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+
 
         </activity>
 
-<activity android:name=".PleaseActivity"
-    android:exported="true">
+<!--        <activity android:name=".ResultListActivity"-->
+<!--    android:exported="true">-->
 
 
 
-</activity>
-
-<activity android:name=".ResultListActivity"
-    android:exported="true">
 
 
-
-</activity>
+<!--</activity>-->
 
         <activity android:name=".FoodEditActivity"
             android:exported="true">
@@ -133,6 +120,30 @@
 
         <activity android:name=".DangNewoActivity" />
         <activity android:name=".GohyulAapActivity" />
+
+        <activity android:name=".ServerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+
+        <activity android:name=".Server1Activity"
+            android:exported="true">
+
+        </activity>
+
+        <activity android:name=".ImageAndDataActivity"
+            android:exported="true">
+
+
+        </activity>
+
+
 
 
 <!--        <provider-->
@@ -159,6 +170,8 @@
                 android:resource="@xml/file_text"/>
         </provider>
 
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        //http 통신 라이브러리 참조
 
     </application>
 

@@ -56,8 +56,8 @@
         <ListView
             android:id="@+id/addview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="180dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/foodadd_btn"
             tools:ignore="MissingConstraints">

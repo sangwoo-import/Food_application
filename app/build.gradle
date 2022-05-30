@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.mymanager"
-        minSdk 19 //원래 21임
+        minSdk 21 //원래 21임
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -58,6 +58,12 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
 
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+    //implementation 'dev.dworks.libs:volleyplus:+'
+
+    implementation 'com.google.code.gson:gson:2.6.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
 
 
     // The GPU delegate library is optional. Depend on it as needed.
@@ -72,6 +78,18 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     implementation 'org.tensorflow:tensorflow-lite:+' //텐서플로우 적용
+
+
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1' //http사용하기
+
+    def uploadServiceVersion = "4.5.5"
+    implementation "net.gotev:uploadservice:$uploadServiceVersion"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+
+
+    //implementation 'org.apache.httpcomponents:httpclient:4.5'
+
 
 
 }

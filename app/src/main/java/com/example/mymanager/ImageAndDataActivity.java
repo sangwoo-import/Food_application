@@ -1,25 +1,26 @@
 package com.example.mymanager;
-import androidx.fragment.app.FragmentActivity;
+
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,38 +28,64 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.FragmentActivity;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.Resource;
 
-import org.tensorflow.lite.Interpreter;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
-public class FoodAddActivity  extends AppCompatActivity {
-
+import java.util.HashMap;
 
 
+public class ImageAndDataActivity  extends AppCompatActivity {
+    //영양분 데이터 pasing
+    private static String TAG = "Mymanager_ImageAndDataActivity";
+
+    private static final String TAG_JSON="영양정보";
+    //private static final String TAG_ID = "id";
+    private static final String TAG_TAN = "탄수화물";
+    //private static final String TAG_NAME = "name";
+    private static final String TAG_ADDRESS ="열량(kcal)";
+    private static final String TAG_DAN = "단백질";
+    private static final String TAG_JI = "지방";
 
 
-    private static final String TAG = "testActivity"; //  이거안되면 CameraActivity
+    private TextView mTextViewResult;
+    ArrayList<HashMap<String, String>> mArrayList;
+    ListView mlistView;
+    String mJsonString;
+
+
+    private static String  name1;
+    private static String TAG_FOOD;
+
+    EditText foodname, fat, carb,calories,protein;
+
+
+//갤러리 카메라 구문
+    //private static final String TAG = "testActivity"; //  이거안되면 CameraActivity
     //public static final String KEY="photo";
 
     public static final int REQUEST_TAKE_PHOTO = 10;
     public static final int REQUEST_PERMISSION = 11;
     private static final int FROM_ALBUM = 1;
 
-    private Button btnCamera,btn_gallery, btnSave;
+    private Button btnCamera, btn_gallery, btnSave ,btn_add;
     private ImageView imageView2;
     private String mCurrentPhotoPath;
     private TextView tv_output1;
@@ -69,14 +96,55 @@ public class FoodAddActivity  extends AppCompatActivity {
         setContentView(R.layout.food_edit);
 
 
-         imageView2 =findViewById(R.id.imageView2);
-       // ivCapture = findViewById(R.id.ivCapture); //ImageView 선언
+
+        //EditText
+        foodname=(EditText)findViewById(R.id.foodname);
+        fat=(EditText)findViewById(R.id.fat);
+        protein=(EditText)findViewById(R.id.protein);
+        carb=(EditText)findViewById(R.id.carb);
+        calories=(EditText)findViewById(R.id.calories);
+
+        //pasring
+        //mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
+        mlistView = (ListView) findViewById(R.id.listView_main_list);
+        //mlistView.setVisibility(View.INVISIBLE); //리스트뷰 숨키기
+
+        mArrayList = new ArrayList<>();
+
+        GetData task = new GetData();
+        task.execute("https://app-db-hdxqr.run.goorm.io/html/Nurt_return.php");
+
+
+        //이미지 갤러리
+        imageView2 =findViewById(R.id.imageView2);
         btnCamera = findViewById(R.id.btnCapture); //Button 선언
         btnSave = findViewById(R.id.btnSave); //Button 선언
-       //tv_output = findViewById(R.id.tv_output);
-        tv_output1 = findViewById(R.id.tv_output1);
-
+        tv_output1 =(TextView) findViewById(R.id.tv_output1);
         btn_gallery= findViewById(R.id.btn_gallery);
+        btn_add=(Button)findViewById(R.id.btn_add);
+
+        tv_output1.setText("미역국");
+
+
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                String name = foodname.getText().toString();
+                String NUTR_CONT2= carb.getText().toString();
+                String  NUTR_CONT3 = protein.getText().toString();
+                String NUTR_CONT4 = fat.getText().toString();
+                String NUTR_CONT1 = calories.getText().toString();
+                GetData task = new GetData();
+                task.execute("https://app-db-hdxqr.run.goorm.io/html/result_apply.php",name, NUTR_CONT2
+                ,NUTR_CONT3,NUTR_CONT4,NUTR_CONT1);
+
+            }
+        });
+
+
+
 
 
         btn_gallery.setOnClickListener(new View.OnClickListener() {
@@ -91,22 +159,10 @@ public class FoodAddActivity  extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
-        checkPermission(); //권한체크
-
-
-        //loadImgArr();
+        checkPermission();//권한 체크
 
         //촬영
         btnCamera.setOnClickListener(v -> captureCamera());
-
         //저장
         btnSave.setOnClickListener(v -> {
 
@@ -128,7 +184,196 @@ public class FoodAddActivity  extends AppCompatActivity {
                 Log.w(TAG, "SAVE ERROR!", e);
             }
         });
+
     }
+
+
+    //데이터 pasing시작하기
+    private class GetData extends AsyncTask<String, Void, String> {
+
+
+
+        //위에까지 건드리는것
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(ImageAndDataActivity.this,
+                    "Please Wait", null, true, true);
+        }
+
+
+
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            //mTextViewResult.setText(result);
+            Log.d(TAG, "response  - " + result);
+
+            if (result == null){
+
+                mTextViewResult.setText(errorString);
+            }
+            else {
+
+                mJsonString = result;
+                showResult();
+
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+//            String name = params[1];  //name
+//            String NUTR_CONT2 = params[4];//탄수화물
+//            String NUTR_CONT3 = params[5];//단백질
+//            String NUTR_CONT4 = params[6];//지방
+//            String NUTR_CONT1 = params[3];//열량
+//            String selectData = "name=$name & NUTR_CONT2=$nutr2 & NUTR_CONT3=$nutr3 & NUTR_CONT4=$nutr4 & NUTR_CONT1=$nutr1";
+
+
+            try {
+                name1="name";
+
+                //TAG_FOOD="미역국";
+
+
+                //selectData = "Data=" + tv_output1.getText().toString();
+                // 따옴표 안과 php의 post [ ] 안이 이름이 같아야 함
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+
+                httpURLConnection.setRequestMethod("POST");
+
+                httpURLConnection.connect();
+
+                //어플에서 데이터 전송
+//                OutputStream outputStream = httpURLConnection.getOutputStream();
+//                outputStream.write(selectData.getBytes("UTF-8"));//원래 getBytes
+//                outputStream.flush();
+//                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+
+
+
+        private void showResult(){
+            try {
+                JSONObject jsonObject = new JSONObject(mJsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+                for(int i=0;i<jsonArray.length();i++){
+
+                    JSONObject item = jsonArray.getJSONObject(i);
+
+                    String tan = item.getString(TAG_TAN);
+
+                    //String food= item.getString(TAG_FOOD);
+                    String name = item.getString(name1);
+                    String address = item.getString(TAG_ADDRESS);
+                    String dan = item.getString(TAG_DAN);
+                    String ji = item.getString(TAG_JI);
+
+
+
+
+
+                    HashMap<String,String> hashMap = new HashMap<>();
+
+                    hashMap.put(TAG_TAN, tan);
+                    hashMap.put(name1, name);
+                    hashMap.put(TAG_ADDRESS, address);
+                    hashMap.put(TAG_DAN,dan);
+                    hashMap.put(TAG_JI,ji);
+
+                   // hashMap.put(TAG_FOOD,food);
+
+                    //mArrayList.add(hashMap);
+
+                    //get하기
+                    foodname.setText(hashMap.get(name1));
+                    carb.setText(hashMap.get(TAG_TAN));
+                    protein.setText(hashMap.get(TAG_DAN));
+                    fat.setText(hashMap.get(TAG_JI));
+                    calories.setText(hashMap.get(TAG_ADDRESS));
+
+                }
+
+//                ListAdapter adapter = new SimpleAdapter(
+//                        ImageAndDataActivity.this, mArrayList, R.layout.food_edit,
+//                        new String[]{name1, TAG_TAN,TAG_DAN,TAG_JI,TAG_ADDRESS},
+//                        new int[]{R.id.foodname, R.id.carb, R.id.protein,R.id.fat,R.id.calories}
+//                );
+//
+//                mlistView.setAdapter(adapter);
+
+            } catch (JSONException e) {
+
+                Log.d(TAG, "showResult : ", e);
+            }
+
+        }
+    }
+
+
+
+
+
+
+
 
 
 
@@ -180,7 +425,6 @@ public class FoodAddActivity  extends AppCompatActivity {
             }
         }
     }
-
     //이미지저장 메소드
     private void saveImg() {
 
@@ -223,36 +467,9 @@ public class FoodAddActivity  extends AppCompatActivity {
         }
     }
 
-//    private void loadImgArr() {
-//        try {
-//
-//            File storageDir = new File(getFilesDir() + "/capture");
-//            String filename = "캡쳐파일" + ".jpg";
-//
-//            File file = new File(storageDir, filename);
-//            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-//            ivCapture.setImageBitmap(bitmap);
-//
-//        } catch (Exception e) {
-//            Log.w(TAG, "Capture loading Error!", e);
-//            Toast.makeText(this, "load failed", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-
-
-
-
-
-
-//
-//        float[][][][] input = new float[1][224][224][3];
-//        float[][][] output = new float[1][12543][4];
-
-
 
 
         try { //촬영 이미지
@@ -269,27 +486,6 @@ public class FoodAddActivity  extends AppCompatActivity {
                             ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                             int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                                     ExifInterface.ORIENTATION_UNDEFINED);
-
-
-//                            int batchNum = 0;
-//                            for (int x = 0; x < 224; x++) {
-//                                for (int y = 0; y < 224; y++) {
-//                                    int pixel = bitmap.getPixel(x, y);
-//                                    input[batchNum][x][y][0] = Color.red(pixel) / 1.0f;
-//                                    input[batchNum][x][y][1] = Color.green(pixel) / 1.0f;
-//                                    input[batchNum][x][y][2] = Color.blue(pixel) / 1.0f;
-//                                }
-//                            }
-//
-//                            Interpreter lite = getTfliteInterpreter("output226.tflite");
-//
-//                            lite.run(input,output);
-
-
-//                            //사진해상도가 너무 높으면 비트맵으로 로딩
-//                            BitmapFactory.Options options = new BitmapFactory.Options();
-//                            options.inSampleSize = 8; //8분의 1크기로 비트맵 객체 생성
-//                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
                             Bitmap rotatedBitmap = null;
                             switch (orientation) {
@@ -324,41 +520,8 @@ public class FoodAddActivity  extends AppCompatActivity {
             Log.w(TAG, "onActivityResult Error !", e);
         }
 
-
-       // int j;
-
-//        for (j = 0; j <4; j++) {
-//            if (output[0][0][j] * 100 > 30) {
-//                if (j == 0) {
-//                    tv_output.setText(String.format("bg  %d %.5f", j, output[0][0][0] * 100));
-//                } else if (j == 1) {
-//                    tv_output.setText(String.format("bab  %d  %.5f", j, output[0][0][1] * 100));
-//                } else if (j == 2) {
-//                    tv_output.setText(String.format("kim %d, %.5f", j, output[0][0][2] * 100));
-//                }
-//                else if (j == 3) {
-//                    tv_output.setText(String.format("nothing, %d, %.5f", j, output[0][0][3] * 100));
-//                }
-//                else {
-//                    tv_output.setText(String.format("아무 음식, %d, %.5f", j));
-//                    //output[0][0][4] * 100)
-//                }
-//            } else
-//                continue;
-//        }
-
-
-
-
-
-
-
-
-
-
-
         if (requestCode != FROM_ALBUM || resultCode != RESULT_OK)// 갤러리 사용
-        return ;
+            return;
 
         try {  // 갤러리 사용
 
@@ -367,100 +530,21 @@ public class FoodAddActivity  extends AppCompatActivity {
 
             Bitmap bitmap = BitmapFactory.decodeStream(buf);
 
-
-
             buf.close();
 
-
-
-
-
             //이미지 뷰에 선택한 사진 띄우기
-          ImageView iv = findViewById(R.id.imageView2);
+            ImageView iv = findViewById(R.id.imageView2);
 
 
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setImageBitmap(bitmap);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // x,y 최댓값 사진 크기에 따라 달라짐 (조절 해줘야함)
-//            for (int x = 0; x < 224; x++) {
-//                for (int y = 0; y < 224; y++) {
-//                    int pixel = bitmap.getPixel(x, y);
-//                    input[batchNum][x][y][0] = Color.red(pixel) / 1.0f;
-//                    input[batchNum][x][y][1] = Color.green(pixel) / 1.0f;
-//                    input[batchNum][x][y][2] = Color.blue(pixel) / 1.0f;
-//                }
-//            }
-//
-//            //자신의 tflite 이름 써주기
-//            Interpreter lite = getTfliteInterpreter("output226.tflite");
-//
-//            lite.run(input,output); //output
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        //인식한부본 출렫하기!!!!
-
-//        int i;
-//        for (i = 1; i <4; i++) {
-//            if (output[0][0][i] * 100 > 90) {
-//                if (i == 1) {
-//                    tv_output.setText(String.format("bg  %d %.2f",i,  output[0][0][1] * 100));
-//
-//                }
-//                else if (i == 2) {
-//                    tv_output.setText(String.format("kim  %d  %.5f", i, output[0][0][2] * 100));
-//                }
-//                if (i == 3) {
-//                    tv_output.setText(String.format("bab "));
-//                }
-//                else {
-//                    tv_output.setText(String.format("아무 음식, %d, %.5f", i));
-//
-//                }
-//              } else
-//                continue;
-//        }
-
-
-
-
-
-//        Intent myintent = new Intent(FoodAddActivity.this,ResultListActivity.class);
-//        myintent.putExtra("name",tv_output1.getText().toString());
-
-
-
-
-        //tv_output.setText(String.format("ccc %f", output[0][0][3] * 100));
-          //tv_output.setText(String.valueOf(output[1][48][4]));
-        // tv_output1.setText(String.valueOf(output[0][0][3]));
-
-
+        //tv_output1.setText(String.format("ggg"));
 
     }
-
-
-
 
 
     //카메라에 맞게 이미지 로테이션
@@ -470,7 +554,6 @@ public class FoodAddActivity  extends AppCompatActivity {
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
                 matrix, true);
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -521,30 +604,5 @@ public class FoodAddActivity  extends AppCompatActivity {
 
 
 
-
-
-
-
-    private Interpreter getTfliteInterpreter(String modelPath) {
-        try {
-            return new Interpreter(loadModelFile(FoodAddActivity.this, modelPath));
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    private MappedByteBuffer loadModelFile(Activity activity, String modelPath) throws IOException {
-        AssetFileDescriptor fileDescriptor = activity.getAssets().openFd(modelPath);
-        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
-        FileChannel fileChannel = inputStream.getChannel();
-        long startOffset = fileDescriptor.getStartOffset();
-        long declaredLength = fileDescriptor.getDeclaredLength();
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
-    }
-
-
 }
+
