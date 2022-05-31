@@ -49,9 +49,7 @@ public class FoodAddActivity  extends AppCompatActivity {
 
 
 
-
-
-    private static final String TAG = "testActivity"; //  이거안되면 CameraActivity
+    private static final String TAG = "testactivity"; //  이거안되면 CameraActivity
     //public static final String KEY="photo";
 
     public static final int REQUEST_TAKE_PHOTO = 10;
@@ -352,19 +350,13 @@ public class FoodAddActivity  extends AppCompatActivity {
 
 
 
-
-
-
-
-
         if (requestCode != FROM_ALBUM || resultCode != RESULT_OK)// 갤러리 사용
         return ;
 
         try {  // 갤러리 사용
 
-            //int batchNum = 0;
-            InputStream buf = getContentResolver().openInputStream(intent.getData()); // intetn대신 data였음 tensor에는
-
+            int batchNum = 0;
+            InputStream buf = getContentResolver().openInputStream(intent.getData()); // intent대신 data였음 tensor에는
             Bitmap bitmap = BitmapFactory.decodeStream(buf);
 
 
@@ -377,7 +369,6 @@ public class FoodAddActivity  extends AppCompatActivity {
 
             //이미지 뷰에 선택한 사진 띄우기
           ImageView iv = findViewById(R.id.imageView2);
-
 
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setImageBitmap(bitmap);
@@ -418,7 +409,7 @@ public class FoodAddActivity  extends AppCompatActivity {
         }
 
 
-        //인식한부본 출렫하기!!!!
+        //인식한부분 출력하기!!!!
 
 //        int i;
 //        for (i = 1; i <4; i++) {
@@ -447,7 +438,6 @@ public class FoodAddActivity  extends AppCompatActivity {
 
 //        Intent myintent = new Intent(FoodAddActivity.this,ResultListActivity.class);
 //        myintent.putExtra("name",tv_output1.getText().toString());
-
 
 
 

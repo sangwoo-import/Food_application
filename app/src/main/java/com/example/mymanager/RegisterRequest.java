@@ -13,15 +13,13 @@ public class RegisterRequest extends StringRequest {
     final static  private String URL="https://app-db-hdxqr.run.goorm.io/html/Register.php";
     private Map<String,String>map;
 
-    public RegisterRequest(String userID, String userPW, int height, int weight, String userGender,Response.Listener<String>listener){
+    public RegisterRequest(String userID, String userPW, int weight, Response.Listener<String> listener){
         super(Method.POST,URL,listener,null);//위 url에 post방식으로 값을 전송
 
         map=new HashMap<>();
         map.put("userID",userID);
         map.put("userPW",userPW);
-        map.put("height",height+"");
         map.put("weight",weight+"");
-        map.put("userGender",userGender);
     }
 
     @Override

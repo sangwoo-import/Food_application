@@ -90,6 +90,8 @@ public class ImageAndDataActivity  extends AppCompatActivity {
     private String mCurrentPhotoPath;
     private TextView tv_output1;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,15 +133,20 @@ public class ImageAndDataActivity  extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                String name = foodname.getText().toString();
-                String NUTR_CONT2= carb.getText().toString();
-                String  NUTR_CONT3 = protein.getText().toString();
-                String NUTR_CONT4 = fat.getText().toString();
-                String NUTR_CONT1 = calories.getText().toString();
-                GetData task = new GetData();
-                task.execute("https://app-db-hdxqr.run.goorm.io/html/result_apply.php",name, NUTR_CONT2
-                ,NUTR_CONT3,NUTR_CONT4,NUTR_CONT1);
+//                String name = foodname.getText().toString();
+//                String NUTR_CONT2= carb.getText().toString();
+//                String NUTR_CONT3 = protein.getText().toString();
+//                String NUTR_CONT4 = fat.getText().toString();
+//                String NUTR_CONT1 = calories.getText().toString();
+//                GetData task = new GetData();
+//                task.execute("https://app-db-hdxqr.run.goorm.io/html/result_apply.php",name, NUTR_CONT2
+//                ,NUTR_CONT3,NUTR_CONT4,NUTR_CONT1);
 
+                Log.e("나나나난", "나 들어옴");
+                Intent intentR = new Intent();
+                intentR.putExtra("calories" , Integer.parseInt(calories.getText().toString())); //사용자에게 입력받은값 넣기
+                setResult(RESULT_OK,intentR); //결과를 저장
+                finish();
             }
         });
 
@@ -207,8 +214,6 @@ public class ImageAndDataActivity  extends AppCompatActivity {
 
 
 
-
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -246,7 +251,6 @@ public class ImageAndDataActivity  extends AppCompatActivity {
                 name1="name";
 
                 //TAG_FOOD="미역국";
-
 
                 //selectData = "Data=" + tv_output1.getText().toString();
                 // 따옴표 안과 php의 post [ ] 안이 이름이 같아야 함

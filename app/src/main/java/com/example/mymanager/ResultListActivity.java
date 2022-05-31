@@ -47,11 +47,11 @@ public class ResultListActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list); // 원래 acticty_list임
+        Log.e("aa","a");
 
         //mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
         mlistView = (ListView) findViewById(R.id.listView_main_list);
@@ -62,16 +62,9 @@ public class ResultListActivity extends AppCompatActivity {
         task.execute("https://app-db-hdxqr.run.goorm.io/html/Nurt_return.php");
 
 
-
-
-
-
-
     }
 
     private class GetData extends AsyncTask<String, Void, String> {
-
-
 
 
 

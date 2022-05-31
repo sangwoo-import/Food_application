@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radio_diet"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="다이어트"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="129dp" />
+
+        <RadioButton
+            android:id="@+id/radio_bulk"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="벌크업"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="202dp" />
+
+        <RadioButton
+            android:id="@+id/radio_dangn"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="당뇨"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="278dp" />
+
+        <RadioButton
+            android:id="@+id/radio_gohyul"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="고혈압"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="374dp" />
+
+    </RadioGroup>
+
+
+        <Button
+            android:id="@+id/btn_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:backgroundTint="#68A7AD"
+            android:text="수정"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.682"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
