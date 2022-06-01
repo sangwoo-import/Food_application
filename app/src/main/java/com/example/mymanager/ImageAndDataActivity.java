@@ -65,6 +65,8 @@ public class ImageAndDataActivity  extends AppCompatActivity {
     private static final String TAG_JI = "지방";
 
 
+
+
     private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
     ListView mlistView;

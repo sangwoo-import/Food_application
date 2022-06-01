@@ -81,6 +81,7 @@ dependencies {
 
 
     implementation 'com.squareup.okhttp3:okhttp:3.8.1' //http사용하기
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.8.0"
 
     def uploadServiceVersion = "4.5.5"
     implementation "net.gotev:uploadservice:$uploadServiceVersion"
