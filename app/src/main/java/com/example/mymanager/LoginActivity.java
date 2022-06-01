@@ -1,9 +1,12 @@
 package com.example.mymanager;
 
+import static com.gun0912.tedpermission.TedPermission.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login=findViewById(R.id.btn_login);
         btn_register=findViewById(R.id.btn_register);
 
+
         btn_register.setOnClickListener(new View.OnClickListener() {//회원가입 버튼을 클릭시 수행
             @Override
             public void onClick(View v) {
@@ -39,14 +43,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         btn_login.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
                  String userID=et_id.getText().toString();
                  String userPW=et_pass.getText().toString();
-
-
 
 
                 Response.Listener<String> responseListener=new Response.Listener<String>() {
@@ -59,17 +59,16 @@ public class LoginActivity extends AppCompatActivity {
                                 String userID = jsonObject.getString("userID");
                                 String userPW = jsonObject.getString("userPW");
 
-
                                 Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("userID", userID);
                                  intent.putExtra("userPW", userPW);
 
+                                // Toast.makeText(this,et_id+"님 안녕하세요.",Toast.LENGTH_SHORT).show();
+
                                 startActivity(intent);
 
-
                             }
-
 
                             else{//회원등록 실패한 경우
                                 Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
@@ -79,6 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+
                     }
                 };
                 LoginRequest loginRequest=new LoginRequest(userID,userPW,responseListener);
@@ -89,4 +90,5 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
+
 }

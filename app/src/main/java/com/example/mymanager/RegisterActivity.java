@@ -21,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText et_id, et_pass,et_passck, et_wei;
+    private EditText et_id, et_pass,et_passck, et_wei, et_gen;
     private String userGender;
     private Button btn_register,validateButton;
     private RadioGroup genderGroup;
@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         validateButton=findViewById(R.id.validateButton);       //라디오 그룹 참조하기
         genderWoman = findViewById(R.id.genderWoman);
         genderMan = findViewById(R.id.genderMan);
+        genderGroup=findViewById(R.id.radioGroup);
 
 
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -118,8 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String userID=et_id.getText().toString();
                 final String userPW=et_pass.getText().toString();
                 int weight=Integer.parseInt(et_wei.getText().toString());
+                final String userGender=et_gen.getText().toString();
                 final String PassCk=et_passck.getText().toString();
-                //라디오버튼 남녀 값 가져오는게 없넹
 
 
                 Response.Listener<String> responseListener=new Response.Listener<String>() { //volley
@@ -144,8 +145,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-                //서버로 volley를 이용해서 요청을 함
-                RegisterRequest registerRequest=new RegisterRequest(userID,userPW, weight,responseListener);
+                //서버로 volley를 이용해서 요청을 함 나중에 usergender 넣기
+                RegisterRequest registerRequest=new RegisterRequest(userID,userPW, weight, responseListener);
                 RequestQueue queue= Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
             }
