@@ -20,13 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import net.gotev.uploadservice.data.UploadNotificationConfig;
-import net.gotev.uploadservice.protocols.multipart.MultipartUploadRequest;
-
 import java.io.File;
 import java.util.UUID;
-
-import retrofit2.http.Multipart;
 
 public class Server1Activity extends AppCompatActivity {
 
@@ -124,12 +119,12 @@ private void uploadImage()
          String path=getPath(filepath);
 
         try{
-            String uploadId= UUID.randomUUID().toString();
-            new MultipartUploadRequest(this,UPLOAD_URL)
-                    .addFileToUpload(path,"image")
-                    //.setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(3)
-                    .startUpload();
+//            String uploadId= UUID.randomUUID().toString();
+//            new MultipartUploadRequest(this,UPLOAD_URL)
+//                    .addFileToUpload(path,"image")
+//                    //.setNotificationConfig(new UploadNotificationConfig())
+//                    .setMaxRetries(3)
+//                    .startUpload();
         }
         catch (Exception ex){
 

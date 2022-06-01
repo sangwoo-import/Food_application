@@ -6,84 +6,116 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
+
     <EditText
         android:id="@+id/et_id"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="아이디"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064" />
+
+    <Button
+        android:id="@+id/validateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#68A7AD"
+        android:text="중복확인"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toEndOf="@+id/et_id"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_pass"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="패스워드"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_id"
-        app:layout_constraintStart_toStartOf="@+id/et_id"
-        app:layout_constraintTop_toBottomOf="@+id/et_id" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.279" />
+
     <EditText
         android:id="@+id/et_passck"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="패스워드 확인"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_pass"
-        app:layout_constraintStart_toStartOf="@+id/et_pass"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
-
-    <EditText
-        android:id="@+id/et_hei"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="신장"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_passck"
-        app:layout_constraintStart_toStartOf="@+id/et_passck"
-        app:layout_constraintTop_toBottomOf="@+id/et_passck" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.169" />
 
     <EditText
         android:id="@+id/et_wei"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="몸무게"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_hei"
-        app:layout_constraintStart_toStartOf="@+id/et_hei"
-        app:layout_constraintTop_toBottomOf="@+id/et_hei" />
-<!--    <EditText-->
-<!--        android:id="@+id/et_gen"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="성별"-->
-<!--        android:inputType="textPersonName"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/et_wei"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/et_wei"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/et_wei" />-->
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381"
+        tools:ignore="MissingConstraints" />
+
 
     <RadioGroup
-        android:id="@+id/genderGroup"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_marginStart="75dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.481"
+        tools:ignore="MissingConstraints"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/genderMan"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="남성"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.541" />
+
+        <RadioButton
+            android:id="@+id/genderWoman"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="여성"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.635"
+            tools:ignore="MissingConstraints" />
 
     </RadioGroup>
 
@@ -91,49 +123,12 @@
         android:id="@+id/btn_register"
         android:layout_width="200dp"
         android:layout_height="45dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="172dp"
+        android:backgroundTint="#68A7AD"
         android:text="회원가입"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/genderGroup"
-        app:layout_constraintTop_toBottomOf="@+id/genderGroup"
-        app:layout_constraintVertical_bias="0.723" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/validateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="28dp"
-        android:text="중복확인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
-        app:layout_constraintStart_toEndOf="@+id/et_id"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
-        android:id="@+id/genderWoman"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="20dp"
-        android:checked="true"
-        android:text="여성"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/genderMan" />
-
-    <RadioButton
-        android:id="@+id/genderMan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="17dp"
-        android:text="남성"
-        app:layout_constraintBottom_toTopOf="@+id/genderWoman"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_wei" />
 </androidx.constraintlayout.widget.ConstraintLayout>

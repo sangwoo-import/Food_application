@@ -21,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText et_id, et_pass,et_passck, et_hei, et_wei,et_gen;
+    private EditText et_id, et_pass,et_passck, et_wei, et_gen;
     private String userGender;
     private Button btn_register,validateButton;
     private RadioGroup genderGroup;
@@ -38,14 +38,12 @@ public class RegisterActivity extends AppCompatActivity {
         //아이디 값 찾아주기
         et_id=findViewById(R.id.et_id);
         et_pass=findViewById(R.id.et_pass);
-        et_hei=findViewById(R.id.et_hei);
         et_wei=findViewById(R.id.et_wei);
-         //et_gen=findViewById(R.id.et_gen);
         et_passck=findViewById(R.id.et_passck);
-        validateButton=findViewById(R.id.validateButton);
-        genderGroup = findViewById(R.id.genderGroup);         //라디오 그룹 참조하기
+        validateButton=findViewById(R.id.validateButton);       //라디오 그룹 참조하기
         genderWoman = findViewById(R.id.genderWoman);
         genderMan = findViewById(R.id.genderMan);
+        genderGroup=findViewById(R.id.radioGroup);
 
 
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -120,14 +118,12 @@ public class RegisterActivity extends AppCompatActivity {
                 //editText에 입력되어있는 값을 get(가져온다)해온다
                 String userID=et_id.getText().toString();
                 final String userPW=et_pass.getText().toString();
-                int height=Integer.parseInt(et_hei.getText().toString());
                 int weight=Integer.parseInt(et_wei.getText().toString());
                 final String userGender=et_gen.getText().toString();
                 final String PassCk=et_passck.getText().toString();
 
 
-
-                Response.Listener<String> responseListener=new Response.Listener<String>() {//volley
+                Response.Listener<String> responseListener=new Response.Listener<String>() { //volley
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -149,8 +145,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-                //서버로 volley를 이용해서 요청을 함
-                RegisterRequest registerRequest=new RegisterRequest(userID,userPW, height, weight,userGender,responseListener);
+                //서버로 volley를 이용해서 요청을 함 나중에 usergender 넣기
+                RegisterRequest registerRequest=new RegisterRequest(userID,userPW, weight, responseListener);
                 RequestQueue queue= Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
             }
