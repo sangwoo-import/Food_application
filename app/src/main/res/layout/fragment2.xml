@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5CB9F">
+    android:background="#E5CB9F"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_open"
@@ -12,149 +11,117 @@
         android:layout_height="55dp"
         android:backgroundTint="#99C4C8"
         android:text="맞춤 기사"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginTop="40dp" />
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_bulk"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:background="#99C4C8"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="170dp"
         android:gravity="center"
-        android:text="벌크업"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
-        tools:ignore="MissingConstraints" />
+        android:text="벌크업" />
 
     <ImageButton
         android:id="@+id/bulk_btn"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_margin="0dp"
-        android:layout_marginStart="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="190dp"
         android:background="@drawable/img"
         android:gravity="center"
-        android:scaleType="fitXY"
-        android:text="벌크업"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Diet_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.264"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+        android:text="벌크업" />
+    <!--alignParent 상위 레이아웃을 기준으로 위치한다-->
+
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_diet"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:background="#99C4C8"
+        android:layout_toRightOf="@+id/tv_bulk"
+        android:layout_alignTop="@+id/tv_bulk"
+        android:layout_marginLeft="20dp"
         android:gravity="center"
-        android:text="다이어트"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
-        tools:ignore="MissingConstraints" />
+        android:text="다이어트" />
 
     <ImageButton
         android:id="@+id/Diet_btn"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_margin="0dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="25dp"
+        android:layout_alignTop="@+id/bulk_btn"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/bulk_btn"
         android:background="@drawable/img_diet"
-        android:gravity="center"
-        android:scaleType="fitXY"
-        android:text="다이어트"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bulk_btn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+        android:gravity="center" />
+    <!--toRightOf 특정 개체의 오른쪽에 위치한다-->
+    <!--alignTop 특정 개체와 높이를 맞춘다-->
+
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_go"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_below="@+id/bulk_btn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:background="#99C4C8"
         android:gravity="center"
-        android:text="고혈압"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
-        tools:ignore="MissingConstraints" />
+        android:text="고혈압" />
 
     <ImageButton
         android:id="@+id/go_btn"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_margin="0dp"
-        android:layout_marginStart="25dp"
+        android:layout_below="@+id/bulk_btn"
+        android:layout_alignLeft="@+id/bulk_btn"
+        android:layout_marginTop="40dp"
         android:background="@drawable/go"
         android:gravity="center"
-        android:scaleType="fitXY"
-        android:text="고혈압"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dn_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+        android:text="고혈압" />
+
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_dang"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:background="#99C4C8"
+        android:layout_toRightOf="@+id/tv_go"
+        android:layout_alignTop="@+id/tv_go"
+        android:layout_marginLeft="20dp"
         android:gravity="center"
-        android:text="당뇨병"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:text="당뇨병" />
+
 
     <ImageButton
         android:id="@+id/dn_btn"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_margin="0dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="25dp"
         android:background="@drawable/img_1"
         android:gravity="center"
-        android:scaleType="fitXY"
         android:text="당뇨병"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/go_btn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+        android:layout_toRightOf="@id/go_btn"
+        android:layout_alignTop="@id/go_btn"
+        android:layout_marginLeft="20dp"/>
+
+</RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
 
 
 
