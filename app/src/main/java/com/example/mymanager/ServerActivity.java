@@ -2,6 +2,8 @@ package com.example.mymanager;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import static java.lang.System.out;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -32,6 +34,8 @@ import androidx.loader.content.CursorLoader;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,7 +58,7 @@ public class ServerActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+   protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
@@ -67,7 +71,9 @@ public class ServerActivity extends AppCompatActivity {
         btnImageSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               FileUploadUtils.send2Server(tempSelectFile); // 원래는 FileUPLOADUTILS ,send2server임
+
+                    FileUploadUtils.send2Server(tempSelectFile); // 원래는 FileUPLOADUTILS ,send2server임
+
                 //uploadImage(); // 수정전
             }
         });
@@ -110,39 +116,15 @@ public class ServerActivity extends AppCompatActivity {
             tempSelectFile = new File(Environment.getExternalStorageDirectory() + "/Pictures", "temp_" + date + ".jpg");
             OutputStream out = new FileOutputStream(tempSelectFile);
             image.compress(Bitmap.CompressFormat.JPEG, 100, out);
+
+            btnImageSend.setEnabled(true);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
-
-        btnImageSend.setEnabled(true);
-
     }
 
-//    private void uploadImage() {
-//        File file = new File(filePath);
-//
-//        Retrofit retrofit = NetworkClient.getRetrofit(); //  원래 file 없음
-//
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-//        MultipartBody.Part parts = MultipartBody.Part.createFormData("newimage", file.getName(), requestBody);
-//
-//        RequestBody someData = RequestBody.create(MediaType.parse("text/plain"), "This is a new Image");
-//
-//        UploadApis uploadApis = retrofit.create(UploadApis.class);
-//        Call call = uploadApis.uploadImage(parts, someData);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onResponse(Call call, Response response) {
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call call, Throwable t) {
-//
-//            }
-//        });
-//    }
+
 
 
 

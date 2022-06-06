@@ -1,43 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mymanager">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--   에뮬레이터 저장소 강제로 늘리기-->
+<!--    android:installLocation="preferExternal"-->
     <uses-permission android:name="android.permission.INTERNET"/>
 
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
+
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Mymanager">
-        <!-- applpication no such file error날때 -->
+        android:theme="@style/Theme.Mymanager"
+        android:requestLegacyExternalStorage="true">
+<!--        applpication no such file error날때-->
 
         <activity
             android:name=".LoginActivity"
             android:exported="true">
 
+
+
+
+        </activity>
+
+        <activity android:name=".RegisterActivity"/>
+
+
+        <activity
+            android:name=".MenuActivity"
+            android:exported="true">
+
         </activity>
 
 
         <activity
-            android:name=".GoalEditActivity"
+    android:name=".CameraActivity2"
+    android:exported="true">
+
+
+</activity>
+
+<activity android:name=".TensorActivity"
+    android:exported="true">
+
+
+
+</activity>
+
+        <activity android:name=".MainActivity"
+            android:exported="true">
+
+
+
+
+
+
+        </activity>
+
+
+        <activity android:name=".testActivity"
+
+            android:exported="true" >
+
+
+
+
+        </activity>
+
+
+        <activity android:name=".DietActivity" />
+
+        <activity android:name=".BulkActivity" />
+
+        <activity android:name=".FoodAddActivity"
+            android:exported="true">
+
+
+
+<!--            <intent-filter>-->
+<!--                <action android:name="kr.co.hta.MyAction" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+
+
+        </activity>
+
+<!--        <activity android:name=".ResultListActivity"-->
+<!--    android:exported="true">-->
+
+
+
+
+
+<!--</activity>-->
+
+        <activity android:name=".FoodEditActivity"
             android:exported="true">
         </activity>
 
-        <activity android:name=".RegisterActivity"
-                  android:exported="true">
 
-        </activity>
 
-        <activity android:name=".MainActivity"
-                  android:exported="true">
+
+
+
+
+        <activity android:name=".EditActivity"/>
+
+        <activity android:name=".DangNewoActivity" />
+        <activity android:name=".GohyulAapActivity" />
+
+        <activity android:name=".ServerActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,45 +132,24 @@
         </activity>
 
 
-
-        <activity android:name=".DietActivity" />
-
-        <activity android:name=".BulkActivity" />
-
-        <!--        <activity-->
-<!--            android:name=".ResultListActivity"-->
-<!--            android:exported="true">-->
-<!--        </activity>-->
-
-        <activity
-            android:name=".FoodEditActivity"
-            android:exported="true">
-        </activity>
-
-
-        <activity android:name=".DangNewoActivity" />
-        <activity android:name=".GohyulAapActivity" />
-
-<!--        <activity android:name=".ResultListActivity"-->
-<!--                  android:exported="true">-->
-<!--        </activity>-->
-
-<!--        <activity android:name=".EditActivity"/>-->
-
-        <activity android:name=".ServerActivity"
-            android:exported="true">
-        </activity>
-
-
         <activity android:name=".Server1Activity"
             android:exported="true">
-        </activity>
 
+        </activity>
 
         <activity android:name=".ImageAndDataActivity"
             android:exported="true">
+
+
+
         </activity>
 
+
+        <activity android:name=".FileUploadUtils2"
+            android:exported="true">
+
+
+        </activity>
 
 
 

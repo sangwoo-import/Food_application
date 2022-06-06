@@ -65,7 +65,6 @@ public class ImageAndDataActivity  extends AppCompatActivity {
     private static final String TAG_JI = "지방";
 
 
-
     private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
     ListView mlistView;
@@ -90,8 +89,6 @@ public class ImageAndDataActivity  extends AppCompatActivity {
     private ImageView imageView2;
     private String mCurrentPhotoPath;
     private TextView tv_output1;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,86 +131,19 @@ public class ImageAndDataActivity  extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
-//                String name = foodname.getText().toString();
-//                String NUTR_CONT2= carb.getText().toString();
-//                String NUTR_CONT3 = protein.getText().toString();
-//                String NUTR_CONT4 = fat.getText().toString();
-//                String NUTR_CONT1 = calories.getText().toString();
-//                GetData task = new GetData();
-//                task.execute("https://app-db-hdxqr.run.goorm.io/html/result_apply.php",name, NUTR_CONT2
-//                ,NUTR_CONT3,NUTR_CONT4,NUTR_CONT1);
-
-                private void showResult(){
-                    try {
-                        JSONObject jsonObject = new JSONObject(mJsonString);
-                        JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-
-                        for(int i=0;i<jsonArray.length();i++){
-
-                            JSONObject item = jsonArray.getJSONObject(i);
-
-                            String tan = item.getString(TAG_TAN);
-
-                            //String food= item.getString(TAG_FOOD);
-                            String name = item.getString(name1);
-                            String address = item.getString(TAG_ADDRESS);
-                            String dan = item.getString(TAG_DAN);
-                            String ji = item.getString(TAG_JI);
-
-
-
-                            HashMap<String,String> hashMap = new HashMap<>();
-
-                            hashMap.put(TAG_TAN, tan);
-                            hashMap.put(name1, name);
-                            hashMap.put(TAG_ADDRESS, address);
-                            hashMap.put(TAG_DAN,dan);
-                            hashMap.put(TAG_JI,ji);
-
-                            // hashMap.put(TAG_FOOD,food);
-
-                            //mArrayList.add(hashMap);
-
-                            //get하기
-                            foodname.setText(hashMap.get(name1));
-                            carb.setText(hashMap.get(TAG_TAN));
-                            protein.setText(hashMap.get(TAG_DAN));
-                            fat.setText(hashMap.get(TAG_JI));
-                            calories.setText(hashMap.get(TAG_ADDRESS));
-
-                        }
-
-//                ListAdapter adapter = new SimpleAdapter(
-//                        ImageAndDataActivity.this, mArrayList, R.layout.food_edit,
-//                        new String[]{name1, TAG_TAN,TAG_DAN,TAG_JI,TAG_ADDRESS},
-//                        new int[]{R.id.foodname, R.id.carb, R.id.protein,R.id.fat,R.id.calories}
-//                );
-//
-//                mlistView.setAdapter(adapter);
-
-                    } catch (JSONException e) {
-
-                        Log.d(TAG, "showResult : ", e);
-                    }
-
-                }
-
+                String name = foodname.getText().toString();
+                String NUTR_CONT2= carb.getText().toString();
+                String  NUTR_CONT3 = protein.getText().toString();
+                String NUTR_CONT4 = fat.getText().toString();
+                String NUTR_CONT1 = calories.getText().toString();
                 GetData task = new GetData();
-                task.execute("https://app-db-hdxqr.run.goorm.io/html/recq_progress.php");
-
-
-                Log.e("나나나난", "나 들어옴");
-                Intent intentR = new Intent();
-                intentR.putExtra("calories" , Integer.parseInt(calories.getText().toString())); //사용자에게 입력받은값 넣기
-                setResult(RESULT_OK,intentR); //결과를 저장
-                finish();
-
-
+                task.execute("https://app-db-hdxqr.run.goorm.io/html/result_apply.php",name, NUTR_CONT2
+                ,NUTR_CONT3,NUTR_CONT4,NUTR_CONT1);
 
             }
-
         });
+
+
 
 
 
@@ -277,6 +207,8 @@ public class ImageAndDataActivity  extends AppCompatActivity {
 
 
 
+
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -314,6 +246,7 @@ public class ImageAndDataActivity  extends AppCompatActivity {
                 name1="name";
 
                 //TAG_FOOD="미역국";
+
 
                 //selectData = "Data=" + tv_output1.getText().toString();
                 // 따옴표 안과 php의 post [ ] 안이 이름이 같아야 함
@@ -393,6 +326,8 @@ public class ImageAndDataActivity  extends AppCompatActivity {
                     String address = item.getString(TAG_ADDRESS);
                     String dan = item.getString(TAG_DAN);
                     String ji = item.getString(TAG_JI);
+
+
 
 
 
@@ -665,6 +600,7 @@ public class ImageAndDataActivity  extends AppCompatActivity {
 
 
     }
+
 
 
 
