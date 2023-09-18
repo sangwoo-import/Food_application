@@ -10,15 +10,15 @@ import java.util.Map;
 public class LoginRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
-    final static  private String URL="https://app-db-hdxqr.run.goorm.io/html/Login.php";
-    private Map<String,String>parameters;
+    final static private String URL = "https://app-db-hdxqr.run.goorm.io/html/Login.php";
+    private Map<String, String> parameters;
 
-    public LoginRequest(String userID, String userPW, Response.Listener<String>listener){
-        super(Method.POST,URL,listener,null);
+    public LoginRequest(String userID, String userPW, Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
 
-        parameters=new HashMap<>();
-        parameters.put("userID",userID);
-        parameters.put("userPW",userPW);
+        parameters = new HashMap<>();
+        parameters.put("userID", userID);
+        parameters.put("userPW", userPW);
 
     }
 

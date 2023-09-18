@@ -22,37 +22,37 @@
             tools:ignore="MissingConstraints" />
 
         <!--        <ProgressBar-->
-<!--            android:id="@+id/progressBar"-->
-<!--            style="@android:style/Widget.ProgressBar.Horizontal"-->
-<!--            android:layout_width="227dp"-->
-<!--            android:layout_height="47dp"-->
-<!--            android:layout_marginStart="92dp"-->
-<!--            android:layout_marginTop="148dp"-->
-<!--            android:layout_weight="2"-->
-<!--            android:max="1800"-->
-<!--            android:paddingTop="12dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:ignore="MissingConstraints" />-->
+        <!--            android:id="@+id/progressBar"-->
+        <!--            style="@android:style/Widget.ProgressBar.Horizontal"-->
+        <!--            android:layout_width="227dp"-->
+        <!--            android:layout_height="47dp"-->
+        <!--            android:layout_marginStart="92dp"-->
+        <!--            android:layout_marginTop="148dp"-->
+        <!--            android:layout_weight="2"-->
+        <!--            android:max="1800"-->
+        <!--            android:paddingTop="12dp"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:ignore="MissingConstraints" />-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/progress_text"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:gravity="center"-->
-<!--            android:text="1800"-->
-<!--            android:textColor="#615D5D"-->
-<!--            android:textSize="28sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/progressBar"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.498"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/progressBar"-->
-<!--            tools:ignore="MissingConstraints" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/progress_text"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentLeft="true"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:layout_centerVertical="true"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="1800"-->
+        <!--            android:textColor="#615D5D"-->
+        <!--            android:textSize="28sp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/progressBar"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.498"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/progressBar"-->
+        <!--            tools:ignore="MissingConstraints" />-->
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -102,8 +102,83 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_foodadd"
             tools:ignore="MissingConstraints">
+
+
+
+
         </ListView>
 
+
+        <TextView
+            android:id="@+id/textView_foodname"
+            android:layout_width="57dp"
+            android:layout_height="37dp"
+            android:layout_margin="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="41dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+
+            app:layout_constraintEnd_toStartOf="@+id/textView_carb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_foodadd" />
+
+        <TextView
+            android:id="@+id/textView_carb"
+            android:layout_width="57dp"
+            android:layout_height="37dp"
+            android:layout_margin="5dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="61dp"
+            android:layout_weight="4"
+            android:padding="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_protein"
+            app:layout_constraintStart_toEndOf="@+id/textView_foodname"
+            app:layout_constraintTop_toBottomOf="@+id/btn_foodadd" />
+
+        <TextView
+            android:id="@+id/textView_protein"
+            android:layout_width="57dp"
+            android:layout_height="37dp"
+            android:layout_margin="5dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="34dp"
+            android:layout_weight="5"
+            android:padding="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_ji"
+            app:layout_constraintStart_toEndOf="@+id/textView_carb"
+            app:layout_constraintTop_toBottomOf="@+id/btn_foodadd" />
+
+        <TextView
+            android:id="@+id/textView_ji"
+            android:layout_width="57dp"
+            android:layout_height="37dp"
+            android:layout_margin="5dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="5"
+            android:padding="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView_calo"
+            app:layout_constraintStart_toEndOf="@+id/textView_protein"
+            app:layout_constraintTop_toBottomOf="@+id/btn_foodadd" />
+
+        <TextView
+            android:id="@+id/textView_calo"
+            android:layout_width="57dp"
+            android:layout_height="37dp"
+            android:layout_margin="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="45dp"
+            android:layout_weight="5"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView_ji"
+            app:layout_constraintTop_toBottomOf="@+id/btn_foodadd" />
 
         <Button
             android:id="@+id/before_food"
@@ -133,13 +208,15 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.222"
+            app:layout_constraintVertical_bias="0.242"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="2800"
+
+            android:text="2400"
+            android:id="@+id/progress"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/prgs"
             app:layout_constraintEnd_toEndOf="@+id/prgs"

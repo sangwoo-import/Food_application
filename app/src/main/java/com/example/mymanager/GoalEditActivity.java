@@ -22,12 +22,11 @@ public class GoalEditActivity extends AppCompatActivity {
     private Button btn_modify;
     private RadioButton radio_diet, radio_bulk, radio_dangn, radio_gohyul;
 
-    public static final int REQUEST_CODE_MAIN=100;
-    public static final int REQUEST_CODE_MODIFY=101;
+    public static final int REQUEST_CODE_MAIN = 100;
+    public static final int REQUEST_CODE_MODIFY = 101;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goaledit);
 
@@ -50,7 +49,7 @@ public class GoalEditActivity extends AppCompatActivity {
                 } else if (i == R.id.radio_dangn) {
                     Toast.makeText(GoalEditActivity.this, "당뇨", Toast.LENGTH_SHORT).show();
                     userGoal = radio_dangn.getText().toString();
-                } else if(i == R.id.radio_gohyul) {
+                } else if (i == R.id.radio_gohyul) {
                     Toast.makeText(GoalEditActivity.this, "고혈압", Toast.LENGTH_SHORT).show();
                     userGoal = radio_gohyul.getText().toString();
                 }
@@ -61,13 +60,14 @@ public class GoalEditActivity extends AppCompatActivity {
         btn_modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
-                    startActivityForResult(intent,REQUEST_CODE_MODIFY);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_MODIFY);
             }
         });
     }
+
     public void modify(View view) {
-        Intent receiveIntent=getIntent();
-        String id=receiveIntent.getStringExtra("userID");
+        Intent receiveIntent = getIntent();
+        String id = receiveIntent.getStringExtra("userID");
     }
-    }
+}

@@ -11,12 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GohyulAapActivity extends AppCompatActivity {
     private WebView webView;
     private String url = "https://dpg.danawa.com/news/view?boardSeq=66&listSeq=2923056&past=Y"; // 원하는 주소
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gohyul);
 
-        webView = (WebView) findViewById(R.id.webView); // webview id 값
+        webView = findViewById(R.id.webView); // webview id 값
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
@@ -25,10 +26,9 @@ public class GohyulAapActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) { //안드로이드에서 어떤 특정한  key값을 지정 해줘라
-        if((keyCode == KeyEvent.KEYCODE_BACK)&& webView.canGoBack() ){
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
             webView.goBack();
             return true;
         }

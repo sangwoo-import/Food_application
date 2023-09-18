@@ -11,12 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DangNewoActivity extends AppCompatActivity {
     private WebView webView;
     private String url = "https://doctorkitchen.co.kr/blog/128/"; // 원하는 주소
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangn);
 
-        webView = (WebView) findViewById(R.id.webView); // webview id 값
+        webView = findViewById(R.id.webView); // webview id 값
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
@@ -27,8 +28,8 @@ public class DangNewoActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) { //안드로이드에서 어떤 특정한  key값을 지정 해줘라
-        if((keyCode == KeyEvent.KEYCODE_BACK)&& webView.canGoBack() ){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
             webView.goBack();
             return true;
         }

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    //상단 고정
+
 
     <ImageView
         android:id="@+id/imageView2"
@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent" />
 
-    //스크롤뷰
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -94,7 +94,6 @@
         </LinearLayout>
     </ScrollView>
 
-    //하단 고정
 
     <LinearLayout
         android:layout_width="match_parent"

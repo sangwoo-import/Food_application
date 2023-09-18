@@ -10,17 +10,18 @@ import java.util.Map;
 public class RegisterRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
-    final static  private String URL="https://app-db-hdxqr.run.goorm.io/html/Register.php";
-    private Map<String,String>map;
+    final static private String URL = "https://app-db-hdxqr.run.goorm.io/html/Register.php";
+    private Map<String, String> map;
 
-    public RegisterRequest(String userID, String userPW, int weight, Response.Listener<String> listener){
-        super(Method.POST,URL,listener,null);//위 url에 post방식으로 값을 전송
+    public RegisterRequest(String userID, String userPW, int weight, Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);//위 url에 post방식으로 값을 전송
 
-        map=new HashMap<>();
-        map.put("userID",userID);
-        map.put("userPW",userPW);
-        map.put("weight",weight+"");
+        map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("userPW", userPW);
+        map.put("weight", weight + "");
     }
+
 
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {

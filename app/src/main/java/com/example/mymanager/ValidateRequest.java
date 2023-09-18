@@ -10,14 +10,14 @@ import java.util.Map;
 
 public class ValidateRequest extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static  private String URL="https://app-db-hdxqr.run.goorm.io/html/UserValidate.php";
-    private Map<String,String> map;
+    final static private String URL = "https://app-db-hdxqr.run.goorm.io/html/UserValidate.php";
+    private Map<String, String> map;
 
-    public ValidateRequest(String userID, Response.Listener<String>listener){
-        super(Request.Method.POST,URL,listener,null);
+    public ValidateRequest(String userID, Response.Listener<String> listener) {
+        super(Request.Method.POST, URL, listener, null);
 
-        map=new HashMap<>();
-        map.put("userID",userID);
+        map = new HashMap<>();
+        map.put("userID", userID);
     }
 
     @Override

@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView_list_id"
+        android:id="@+id/textView_foodname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
 
 
     <TextView
-        android:id="@+id/textView_list_name"
+        android:id="@+id/textView_carb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="4"
@@ -27,11 +27,24 @@
 
 
     <TextView
-        android:id="@+id/textView_list_address"
+        android:id="@+id/textView_protein"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:layout_margin="5dp"
         android:padding="5dp" />
-
+    <TextView
+        android:id="@+id/textView_ji"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:layout_margin="5dp"
+        android:padding="5dp" />
+    <TextView
+        android:id="@+id/textView_calo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:layout_margin="5dp"
+        android:padding="5dp" />
 </LinearLayout>
