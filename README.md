@@ -11,7 +11,8 @@
 ## 2. main탭에서 다이어트 및 벌크업 등의 관심분야 별 정보를 웹뷰형식으로 제공
 ### <벌크업 관련 영상> &nbsp;&nbsp; <다이어트 관련 영상> &nbsp;&nbsp;&nbsp;&nbsp; <고혈압 관련 기사> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <당뇨 기사>
 
-<img width="167" alt="벌크" src="https://github.com/sangwoo-import/Food_application/assets/79038757/3cdcc3b7-83bc-479c-b379-d74ae91be09c"> &nbsp; &nbsp; <img width="167" alt="다이어트" src="https://github.com/sangwoo-import/Food_application/assets/79038757/8b059935-3c3d-4729-b82f-250c42aa3771"> &nbsp; &nbsp; <img width="175" alt="고혈압" src="https://github.com/sangwoo-import/Food_application/assets/79038757/14f934ab-da0b-4678-9859-9b9ff6a367d9"> &nbsp; &nbsp; <img width="165" alt="당뇨" src="https://github.com/sangwoo-import/Food_application/assets/79038757/5c5aec53-e15d-426b-9ca3-190639262a9a">
+<img width="167" alt="벌크" src="https://github.com/sangwoo-import/Food_application/assets/79038757/3cdcc3b7-83bc-479c-b379-d74ae91be09c"> &nbsp; &nbsp; <img width="167" alt="다이어트" src="https://github.com/sangwoo-import/Food_application/assets/79038757/c87af1ad-0f2a-44e2-98de-d753dfba5da5">
+ &nbsp; &nbsp; <img width="175" alt="고혈압" src="https://github.com/sangwoo-import/Food_application/assets/79038757/14f934ab-da0b-4678-9859-9b9ff6a367d9"> &nbsp; &nbsp; <img width="165" alt="당뇨" src="https://github.com/sangwoo-import/Food_application/assets/79038757/5c5aec53-e15d-426b-9ca3-190639262a9a">
 
 ## 3. my탭에서 식단 추가버튼을 이용하여 갤러리에 있는 사진에 모델 적용 및 관련 영양정보 표시
 
@@ -21,6 +22,14 @@
 ## 4.관심목표에 따른 관련 영양정보를 일일 섭취 통계를 통해 프로그레스 바 형식으로 간략하게 표시
 
 <img width="259" alt="image" src="https://github.com/sangwoo-import/Food_application/assets/79038757/b0e76835-8804-4389-a826-195b396c89a1">
+
+## 💻 주요기능
+### 갤러리 기능,인공지능,영양분 표출
+#### - 공공데이터 포털 영양분 open api 활용 , Mask R-CNN 딥러닝 모델 활용
+
+# 🛠️ 기술스택
+
+
 
 
 
