@@ -29,6 +29,10 @@
 
 # 🛠️ 기술스택
 
+<img width="1142" alt="image" src="https://github.com/sangwoo-import/Food_application/assets/79038757/c6fda445-7e25-490a-92f9-03fff640bcf8">
+
+# 📎 아키텍처
+
 
 
 
