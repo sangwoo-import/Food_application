@@ -34,6 +34,9 @@
 # 📎 아키텍처
 
 
+<img width="1111" alt="image" src="https://github.com/sangwoo-import/Food_application/assets/79038757/35aa016c-2fbf-4d0e-aa91-e3f34c43e648">
+
+
 
 
 
